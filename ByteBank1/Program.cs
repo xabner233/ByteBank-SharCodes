@@ -9,6 +9,7 @@ namespace ByteBank1
 
         static void ShowMenu()
         {
+            Console.Clear();
             Console.WriteLine("1 - Inserir novo usuário");
             Console.WriteLine("2 - Deletar um usuário");
             Console.WriteLine("3 - Listar todas as contas registradas");
@@ -21,6 +22,7 @@ namespace ByteBank1
 
         static void RegistrarNovoUsuario(List<string> cpfs, List<string> titulares, List<string> senhas, List<double> saldos, List<string> historico)
         {
+            Console.Clear();
             Console.Write("Digite o cpf: ");
             cpfs.Add(Console.ReadLine());
             Console.Write("Digite o nome: ");
@@ -29,10 +31,13 @@ namespace ByteBank1
             senhas.Add(Console.ReadLine());
             saldos.Add(0);
             historico.Add(null);
+            Console.WriteLine("Usuario cadastrado!");
+            Console.ReadKey();
         }
 
         static void DeletarUsuario(List<string> cpfs, List<string> titulares, List<string> senhas, List<double> saldos, List<string> historico)
         {
+            Console.Clear();
             Console.Write("Digite o cpf: ");
             string cpfParaDeletar = Console.ReadLine();
             int indexParaDeletar = cpfs.FindIndex(cpf => cpf == cpfParaDeletar);
@@ -50,18 +55,22 @@ namespace ByteBank1
             historico.RemoveAt(indexParaDeletar);
 
             Console.WriteLine("Conta deletada com sucesso");
+            Console.ReadKey();
         }
 
         static void ListarTodasAsContas(List<string> cpfs, List<string> titulares, List<double> saldos)
         {
+            Console.Clear();
             for (int i = 0; i < cpfs.Count; i++)
             {
                 ApresentaConta(i, cpfs, titulares, saldos);
             }
+            Console.ReadKey();
         }
 
         static void ApresentarUsuario(List<string> cpfs, List<string> titulares, List<double> saldos, List<string> senhas)
         {
+            Console.Clear();
             Console.Write("Digite o cpf: ");
             string cpfParaApresentar = Console.ReadLine();
             int index = cpfs.FindIndex(cpf => cpf == cpfParaApresentar);
@@ -72,10 +81,12 @@ namespace ByteBank1
             {
                 ApresentaConta(index, cpfs, titulares, saldos);
             }
+            Console.ReadKey();
         }
 
         static void ApresentarValorAcumulado(List<double> saldos)
         {
+            Console.Clear();
             Console.WriteLine($"Total acumulado no banco: {saldos.Sum()}");
             // saldos.Sum(); ou .Agregatte(0.0, (x, y) => x + y)
         }
@@ -87,6 +98,7 @@ namespace ByteBank1
 
         static bool VerificarConta(int index, List<string> titulares, List<double> saldos, List<string> senhas)
         {
+            Console.Clear();
             string senha;
             bool c1 = false, contaFinal = false;
 
@@ -134,10 +146,12 @@ namespace ByteBank1
                 }
             }
             return contaFinal;
+            Console.ReadKey();
         }
 
         static void RealizarDeposito(List<string> cpfs, List<string> titulares, List<double> saldos, List<string> senhas, List<string> historico)
         {
+            Console.Clear();
             bool conta;           
             Console.Write("Digite o cpf: ");
             string cpfParaApresentar = Console.ReadLine();
@@ -153,11 +167,13 @@ namespace ByteBank1
                 string deposito = ($"Deposito realizado no valor de {valor.ToString("F2")}");
                 Console.WriteLine(deposito);                
                 historico[index] += ($"\n{deposito} \n");
-            }            
+            }
+            Console.ReadKey();
         }
 
         static void RealizarSaque(List<string> cpfs, List<string> titulares, List<double> saldos, List<string> senhas, List<string> historico)
         {
+            Console.Clear();
             Console.Write("Digite o cpf: ");
             string cpfParaApresentar = Console.ReadLine();
             int index = cpfs.FindIndex(cpf => cpf == cpfParaApresentar);
@@ -184,9 +200,11 @@ namespace ByteBank1
                 Console.WriteLine(saque);
                 historico[index] += ($"\n{saque} \n");
             }
+            Console.ReadKey();
         }
         static void RealizarTransferencia(List<string> cpfs, List<string> titulares, List<double> saldos, List<string> senhas, List<string> historico)
         {
+            Console.Clear();
             Console.Write("Digite o cpf da conta que realizara transferencia: ");
             string cpfParaApresentar = Console.ReadLine();
             int index = cpfs.FindIndex(cpf => cpf == cpfParaApresentar), index2=-1;
@@ -212,7 +230,8 @@ namespace ByteBank1
                     valor = double.Parse(Console.ReadLine());
                     contaDestinatario = true;
                 }
-                
+                Console.ReadKey();
+
             }
             
 
@@ -234,6 +253,7 @@ namespace ByteBank1
         
         static void ExtratoConta(List<string> cpfs, List<string> titulares, List<double> saldos, List<string> senhas, List<string> historico)
         {
+            Console.Clear();
             Console.Write("Digite o cpf da conta que sera realizado o extrato: ");
             string cpfParaApresentar = Console.ReadLine();
             int index = cpfs.FindIndex(cpf => cpf == cpfParaApresentar), index2 = -1;
@@ -244,15 +264,18 @@ namespace ByteBank1
             {
                 Console.WriteLine(historico[index]);
             }
+            Console.ReadKey();
         }
 
         static void MenuSecundario(List<string> cpfs, List<string> titulares, List<double> saldos, List<string> senhas, List<string> historico)
         {
+            Console.Clear();
             Console.WriteLine("Digite Uma Opçao");
             int option = 0;
             
             while (option != 9)
             {
+                Console.Clear();
                 Console.WriteLine("1 - Realizar um deposito");
                 Console.WriteLine("2 - Realizar um saque");
                 Console.WriteLine("3 - Realizar uma transfêrencia");
@@ -286,6 +309,7 @@ namespace ByteBank1
                     
                 
             }
+            Console.ReadKey();
         }
 
        
