@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 
 namespace ByteBank1
@@ -32,6 +33,8 @@ namespace ByteBank1
             saldos.Add(0);
             historico.Add(null);
             Console.WriteLine("Usuario cadastrado!");
+            
+            Console.WriteLine("\n\nPressione ENTER para continuar!");
             Console.ReadKey();
         }
 
@@ -55,6 +58,8 @@ namespace ByteBank1
             historico.RemoveAt(indexParaDeletar);
 
             Console.WriteLine("Conta deletada com sucesso");
+
+            Console.WriteLine("\n\nPressione ENTER para continuar!");
             Console.ReadKey();
         }
 
@@ -65,6 +70,8 @@ namespace ByteBank1
             {
                 ApresentaConta(i, cpfs, titulares, saldos);
             }
+            Console.WriteLine();
+            Console.WriteLine("Pressione ENTER para continuar!");
             Console.ReadKey();
         }
 
@@ -81,14 +88,18 @@ namespace ByteBank1
             {
                 ApresentaConta(index, cpfs, titulares, saldos);
             }
+            Console.WriteLine("\n\nPressione ENTER para continuar!");
             Console.ReadKey();
         }
 
         static void ApresentarValorAcumulado(List<double> saldos)
         {
             Console.Clear();
-            Console.WriteLine($"Total acumulado no banco: {saldos.Sum()}");
-            // saldos.Sum(); ou .Agregatte(0.0, (x, y) => x + y)
+            double saldoFinal = saldos.Sum();
+            Console.WriteLine($"Total acumulado no banco: {saldoFinal.ToString("F2")}");
+
+            Console.WriteLine("\n\nPressione ENTER para continuar!");
+            Console.ReadKey();
         }
 
         static void ApresentaConta(int index, List<string> cpfs, List<string> titulares, List<double> saldos)
@@ -146,6 +157,8 @@ namespace ByteBank1
                 }
             }
             return contaFinal;
+
+            Console.WriteLine("\n\nPressione ENTER para continuar!");
             Console.ReadKey();
         }
 
@@ -168,6 +181,7 @@ namespace ByteBank1
                 Console.WriteLine(deposito);                
                 historico[index] += ($"\n{deposito} \n");
             }
+            Console.WriteLine("\n\nPressione ENTER para continuar!");
             Console.ReadKey();
         }
 
@@ -208,6 +222,7 @@ namespace ByteBank1
                     Console.WriteLine("CPF invalido.");                   
                 }
 
+            Console.WriteLine("\n\nPressione ENTER para continuar!");
             Console.ReadKey();
         }
         static void RealizarTransferencia(List<string> cpfs, List<string> titulares, List<double> saldos, List<string> senhas, List<string> historico)
@@ -238,7 +253,8 @@ namespace ByteBank1
                     valor = double.Parse(Console.ReadLine());
                     contaDestinatario = true;
                 }
-                Console.ReadKey();
+             //   Console.WriteLine("Pressione ENTER para continuar!");
+             //   Console.ReadKey();
 
             }
 
@@ -257,6 +273,7 @@ namespace ByteBank1
                     Console.WriteLine(transferencia);
 
                     historico[index] += ($"\n{transferencia} \n");
+                    historico[index2] += ($"\n Transferencia recebida no valor de {valor.ToString("F2")} \n");
                 }
             }
             catch (Exception)
@@ -264,7 +281,10 @@ namespace ByteBank1
 
                 Console.WriteLine("Cpf Invalido!"); ;
             }
+            
+            Console.WriteLine("\n\nPressione ENTER para continuar!");
             Console.ReadKey();
+            
         }
         
         static void ExtratoConta(List<string> cpfs, List<string> titulares, List<double> saldos, List<string> senhas, List<string> historico)
@@ -280,6 +300,7 @@ namespace ByteBank1
             {
                 Console.WriteLine(historico[index]);
             }
+            Console.WriteLine("\n\nPressione ENTER para continuar!");
             Console.ReadKey();
         }
        
@@ -308,6 +329,7 @@ namespace ByteBank1
                         {
                             case 9:
                                 Console.WriteLine("Estou voltando ao menu principal...");
+                                Console.WriteLine("\n\nPressione ENTER para continuar!");
                                 break;
                             case 1:
                                 RealizarDeposito(cpfs, titulares, saldos, senhas, historico);
