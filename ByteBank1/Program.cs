@@ -174,32 +174,40 @@ namespace ByteBank1
         static void RealizarSaque(List<string> cpfs, List<string> titulares, List<double> saldos, List<string> senhas, List<string> historico)
         {
             Console.Clear();
-            Console.Write("Digite o cpf: ");
-            string cpfParaApresentar = Console.ReadLine();
-            int index = cpfs.FindIndex(cpf => cpf == cpfParaApresentar);
+
+                    Console.Write("Digite o cpf: ");
+                    string cpfParaApresentar = Console.ReadLine();
+                   int index = cpfs.FindIndex(cpf => cpf == cpfParaApresentar);
             bool conta;
             double valor = 0;
-            conta = VerificarConta(index, titulares, saldos, senhas);
+            conta = VerificarConta(index, titulares, saldos, senhas);          
 
-            if (conta == true)
-            {
-                Console.Write("Digite o valor a ser sacado em conta: ");
-                valor = double.Parse(Console.ReadLine());
-            }
+                if (conta == true)
+                {
+                    Console.Write("Digite o valor a ser sacado em conta: ");
+                    valor = double.Parse(Console.ReadLine());
+                }
+                try
+                {
+                    if (saldos[index] < valor)
+                    {
+                        Console.WriteLine("Não foi possível realizar o saque");
+                        Console.WriteLine("MOTIVO: saldo a baixo do valor de saque.");
+                    }
+                    else
+                    {
+                        string saque;
+                        saldos[index] -= valor;
+                        saque = ($"Saque realizado no valor de {valor.ToString("F2")}");
+                        Console.WriteLine(saque);
+                        historico[index] += ($"\n{saque} \n");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("CPF invalido.");                   
+                }
 
-            if (saldos[index] < valor)
-            {
-                Console.WriteLine("Não foi possível realizar o saque");
-                Console.WriteLine("MOTIVO: saldo a baixo do valor de sauqe.");
-            }
-            else
-            {
-                string saque;
-                saldos[index] -= valor;
-                saque = ($"Saque realizado no valor de {valor.ToString("F2")}");
-                Console.WriteLine(saque);
-                historico[index] += ($"\n{saque} \n");
-            }
             Console.ReadKey();
         }
         static void RealizarTransferencia(List<string> cpfs, List<string> titulares, List<double> saldos, List<string> senhas, List<string> historico)
@@ -233,22 +241,30 @@ namespace ByteBank1
                 Console.ReadKey();
 
             }
-            
 
-            if (saldos[index] < valor && contaDestinatario == true)
+            try
             {
-                Console.WriteLine("Não foi possível realizar a transferencia");
-                Console.WriteLine("MOTIVO: saldo a baixo do valor de transferencia.");
-            }
-            else if(saldos[index] > valor && contaDestinatario == true)
-            {
-                saldos[index] -= valor;
-                saldos[index2] += valor;
-                string transferencia = ($"Transferencia Realizada no valor de {valor.ToString("F2")}");
-                Console.WriteLine(transferencia);
+                if (saldos[index] < valor && contaDestinatario == true)
+                {
+                    Console.WriteLine("Não foi possível realizar a transferencia");
+                    Console.WriteLine("MOTIVO: saldo a baixo do valor de transferencia.");
+                }
+                else if (saldos[index] > valor && contaDestinatario == true)
+                {
+                    saldos[index] -= valor;
+                    saldos[index2] += valor;
+                    string transferencia = ($"Transferencia Realizada no valor de {valor.ToString("F2")}");
+                    Console.WriteLine(transferencia);
 
-                historico[index] += ($"\n{transferencia} \n");
+                    historico[index] += ($"\n{transferencia} \n");
+                }
             }
+            catch (Exception)
+            {
+
+                Console.WriteLine("Cpf Invalido!"); ;
+            }
+            Console.ReadKey();
         }
         
         static void ExtratoConta(List<string> cpfs, List<string> titulares, List<double> saldos, List<string> senhas, List<string> historico)
@@ -266,6 +282,7 @@ namespace ByteBank1
             }
             Console.ReadKey();
         }
+       
 
         static void MenuSecundario(List<string> cpfs, List<string> titulares, List<double> saldos, List<string> senhas, List<string> historico)
         {
